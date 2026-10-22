@@ -1,34 +1,61 @@
-![tp2](https://github.com/fiuba/algo3_proyecto_base_tp2/actions/workflows/build.yml/badge.svg) [![codecov](https://codecov.io/gh/fiuba/algo3_proyecto_base_tp2/branch/master/graph/badge.svg)](https://codecov.io/gh/fiuba/algo3_proyecto_base_tp2)
+# Gwent
 
-# TP2 Paradigmas de Programación: Gwent
+A two-player desktop version of Gwent, the card game from *The Witcher 3*, built in Java with JavaFX.
 
-Trabajo Práctico número 2 de la materia Paradigmas de Programación de FIUBA
+Developed for Programming Paradigms (TB025) at the Faculty of Engineering, University of Buenos Aires (FIUBA), first semester of 2025.
 
-## Grupo {9}
+## Gameplay
 
-* **Integrante 1** - [Agustin Ivan Abitabile](https://github.com/AgustN68)
-* **Integrante 2** - [Axel Miguel Billordo](https://github.com/axeel25)
-* **Integrante 3** - [Felipe Ignacio Quero Retamal](https://github.com/fqueror)
-* **Integrante 4** - [Santiago Fardini](https://github.com/FARDOO)
-* **Integrante 5** - [Tomás Bautista Conti](https://github.com/tomasuba)
+- Two players share the same computer. A coin toss decides who starts.
+- Each player has a deck of 21 cards (15 units and 6 special cards) and draws 10 of them.
+- Units are placed in one of three rows: close combat, ranged or siege. The player with the most strength on the board wins the round, and the first player to win two rounds wins the match.
+- Unit abilities: Agile, Spy, Medic, Tight Bond, Morale Boost and Legendary.
+- Special cards: weather (Biting Frost, Torrential Rain, Skellige Storm), Clear Weather, Scorch and Commander's Horn.
 
-Corrector: **Pablo Suárez**
+## Design
 
-## Aplicación
+- **MVC:** the game model is independent of the JavaFX views and controllers. An [ArchUnit](https://www.archunit.org/) test enforces this.
+- **Game phases** (setup, preparation, play, end) are separate classes that hand control to the next phase.
+- **Polymorphism** for cards, abilities, rows and weather instead of type checks.
+- **Factory** classes build cards and abilities from the JSON deck definition.
+- **Null Object** classes (`CartaNula`, `SinClima`, `SinModificador`) replace `null` checks.
+- Unit tests with JUnit 5 and Mockito. UML class and sequence diagrams are in [`diagrams/`](diagrams/).
 
-La versión más reciente de la aplicación puede encontrarse en la pestaña [releases](https://github.com/fiuba/algo3_proyecto_base_tp2/releases/latest) y ejecutarse en Linux, Windows o Mac de esta forma:
+## Requirements
+
+- Java 11 or later
+- [Maven](https://maven.apache.org/)
+
+JavaFX is downloaded by Maven.
+
+## Usage
+
+Run the commands from the repository root.
 
 ```bash
-$ java -jar <archivo.jar>
+mvn clean javafx:run   # run the game
+mvn clean test         # run the tests
 ```
 
-## Desarrollo
+To build a standalone JAR:
 
-Aquellos que deseen colaborar con el proyecto pueden consultar la [guía de desarrollo](./docs/Desarrollo.md).
+```bash
+mvn clean package -DskipTests -Ppackage
+java -jar target/tp2-0.0.1.jar
+```
 
-## Licencia
+The decks are read from `src/main/java/edu/fiuba/algo3/archivos/gwent.json`, so the JAR also needs to run from the repository root.
 
-Este repositorio se encuentra bajo la Licencia MIT.
+A Docker setup is available in [`docker/`](docker/) (see [`docs/Docker.md`](docs/Docker.md)).
 
-## Enunciado
-[[TP2] [2025 1C] - Gwent.pdf](https://github.com/user-attachments/files/20525358/TP2.2025.1C.-.Gwent.pdf)
+## Project structure
+
+```
+src/main/java/edu/fiuba/algo3/
+├── modelo/          # game model: cards, abilities, rows, players, rounds, phases
+├── vistas/          # JavaFX views
+├── controllers/     # controllers between views and model
+└── archivos/        # deck definitions (gwent.json)
+src/main/test/       # unit and architecture tests
+diagrams/            # PlantUML diagrams
+```
