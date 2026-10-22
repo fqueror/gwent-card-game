@@ -4,7 +4,6 @@ import edu.fiuba.algo3.modelo.Carta.Carta;
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima.ClimaPosible;
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Despejado;
-import edu.fiuba.algo3.modelo.Carta.Especial.Clima.SinClima;
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class Tablero {
         return puntajeTotal;
     }
 
-    public void limpiarClima(ClimaPosible climaDespejado) {
+    public void limpiarClima(Despejado climaDespejado) {
         for (Seccion seccion : secciones) {
             seccion.establecerClima(climaDespejado);
         }

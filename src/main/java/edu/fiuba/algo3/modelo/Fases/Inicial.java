@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.Fases;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Despejado;
-import edu.fiuba.algo3.modelo.Carta.Especial.Clima.SinClima;
 import edu.fiuba.algo3.modelo.Lector.Lector;
 import edu.fiuba.algo3.modelo.Lector.LectorJson;
 import edu.fiuba.algo3.modelo.Seccion.Asedio;
@@ -44,7 +43,7 @@ public class Inicial extends Fase {
         crearTableros();
         crearJugadores();
 
-        prepararSecciones();
+       prepararSecciones();
 
         List <Mazo> mazos = lector.leerMazos(RUTA_JSON, jugador1, jugador2);
 
@@ -63,10 +62,10 @@ public class Inicial extends Fase {
         List<Seccion> seccionesT2 = tablero2.getSecciones();
 
         for (Seccion seccion : seccionesT1) {
-            seccion.establecerClima(new SinClima());
+            seccion.establecerClima(new Despejado(tablero1,tablero2));
         }
         for (Seccion seccion : seccionesT2) {
-            seccion.establecerClima(new SinClima());
+            seccion.establecerClima(new Despejado(tablero1,tablero2));
         }
     }
 

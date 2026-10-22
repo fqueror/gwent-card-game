@@ -7,6 +7,4 @@ import java.util.List;
 public interface ClimaPosible {
 
     void modificarPuntaje(List<Unidad> unidades);
-
-    String getNombre();
 }

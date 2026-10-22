@@ -8,14 +8,12 @@ import java.util.List;
 
 public class Clima extends Especial implements ClimaPosible {
 
-    private String nombre;
     protected static final int VALOR = 1;
 
     protected List<Seccion> seccionesAfectadas;
 
-    public Clima(List<Seccion> secciones, String nombre) {
+    public Clima(List<Seccion> secciones) {
         seccionesAfectadas = secciones;
-        this.nombre = nombre;
     }
 
     @Override
@@ -39,9 +37,5 @@ public class Clima extends Especial implements ClimaPosible {
         for (Unidad unidad : unidades){
             unidad.actualizarPuntaje(VALOR);
         }
-    }
-
-    public String getNombre() {
-        return nombre;
     }
 }

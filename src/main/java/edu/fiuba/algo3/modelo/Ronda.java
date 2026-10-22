@@ -2,7 +2,6 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Clima;
 import edu.fiuba.algo3.modelo.Carta.Especial.Clima.Despejado;
-import edu.fiuba.algo3.modelo.Carta.Especial.Clima.SinClima;
 import edu.fiuba.algo3.modelo.exceptions.NoHayCartasSuficientesException;
 
 import edu.fiuba.algo3.modelo.Seccion.Seccion;
@@ -33,8 +32,8 @@ public class Ronda {
         Tablero tablero1 = jugador1.getTablero();
         Tablero tablero2 = jugador2.getTablero();
 
-        tablero1.limpiarClima(new SinClima());
-        tablero2.limpiarClima(new SinClima());
+        tablero1.limpiarClima(new Despejado(tablero1,tablero2));
+        tablero2.limpiarClima(new Despejado(tablero1,tablero2));
     }
 
     private void finalizarRonda() {
