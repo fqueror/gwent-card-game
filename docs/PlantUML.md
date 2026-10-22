@@ -30,7 +30,7 @@ El script requiere que la herramienta [plantuml](#plantuml) esté instalada.
 
 **Nota 2:**
 
-No contamos con un script para sistemas operativos Windows. Cualquier colaboración es aceptada. Para más información revisar [guía de desarrollo](../docs/Desarrollo.md).
+No contamos con un script para sistemas operativos Windows.
 
 ### Editor online
 
